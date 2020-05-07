@@ -296,9 +296,11 @@ exports.getTags = async(req, res) => {
         res.json({err})
     }
 }
+
+
 exports.tabItems = async(req, res) => {
     try {
-        const searchQuery = req.params.searchQuery;
+        let searchQuery = req.params.searchQuery;
         if(!searchQuery) { throw('no search query');}
         Items.createIndexes({name: "text", char1: "text", char2: "text", char3: "text", char4: "text", char5: "text"})
         const items = await Items.find({$text: {$search: searchQuery}});
